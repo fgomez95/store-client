@@ -1,7 +1,7 @@
 import React from 'react';
 
 const shoppingCartItem = (props) => {
-    const {name, code, price, size} = props.item;
+    const {name, code, price, size, totalAmount} = props.item;
     return(
         <div className="shopping-cart-item">
             <p>
@@ -15,6 +15,9 @@ const shoppingCartItem = (props) => {
             </p>
             <p>
                 <b>Size: </b>{size}
+            </p>
+            <p>
+                <b>Total: </b>{totalAmount}
             </p>
         </div>
     );

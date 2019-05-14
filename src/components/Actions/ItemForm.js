@@ -1,30 +1,34 @@
 import React from 'react';
-import {itemsList, paymentsList} from '../../mock_data';
+import { itemsList, paymentsList } from '../../mock_data';
+import SelectedItemOverview from './SelectedItemOverview';
 
-const ItemForm = ({handleInput, onSubmit, amount, paymentType, itemName}) => {
+const ItemForm = ({ handleInput, handleAddItem, amount, paymentType, selectedItem, totalAmount, handleReset }) => {
     const itemOptions = itemsList().map(
-        el => <option value={el.name} key={el.code}>
-                {el.name}
-              </option>
+        el => <option value={el.name} key={el.id}>
+            {el.name}
+        </option>
     );
     const paymentOptions = paymentsList().map(
-        el => <option value={el.symb} key={el.id}>
-                {el.symb}
-              </option>
+        el =>   <option value={el.symb} key={el.id}>
+                    {el.symb}
+                </option>
     );
-    return(
+    return (
         <div>
-            <form>
+            <form onSubmit={handleAddItem}>
                 <div>
                     <label>Select Item</label>
-                    <select onChange={handleInput} name="itemName" value={itemName}>
-                        <option value=""/>
+                    <select onChange={handleInput} 
+                        name="selectedItem" 
+                        value={selectedItem}
+                    >
+                        <option value="" />
                         {itemOptions}
                     </select>
                 </div>
                 <div>
                     <label>Amount</label>
-                    <input 
+                    <input
                         type="number"
                         placeholder="amount"
                         value={amount}
@@ -35,11 +39,24 @@ const ItemForm = ({handleInput, onSubmit, amount, paymentType, itemName}) => {
                 <div>
                     <label>Payment Type</label>
                     <select onChange={handleInput} name="paymentType" value={paymentType}>
-                        <option value=""/>
+                        <option value="" />
                         {paymentOptions}
                     </select>
                 </div>
+                <div>
+                    <input 
+                        type="submit"
+                        value="Add Item"
+                    />
+                </div>
             </form>
+            <button onClick={handleReset}>Reset form</button>
+            <SelectedItemOverview
+                amount={amount}
+                paymentType={paymentType}
+                itemName={selectedItem}
+                totalAmount={totalAmount}
+            />
         </div>
     );
 }
