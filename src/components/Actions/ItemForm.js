@@ -1,17 +1,19 @@
 import React from 'react';
-import { itemsList, paymentsList } from '../../mock_data';
-import SelectedItemOverview from './SelectedItemOverview';
+import {itemsList} from '../../mock_data';
 
-const ItemForm = ({ handleInput, handleAddItem, amount, paymentType, selectedItem, totalAmount, handleReset }) => {
+const ItemForm = ({ 
+    handleInput, 
+    handleAddItem, 
+    amount, 
+    buyer,
+    paymentType, 
+    selectedItem, 
+    totalAmount, 
+    handleReset }) => {
     const itemOptions = itemsList().map(
         el => <option value={el.name} key={el.id}>
             {el.name}
         </option>
-    );
-    const paymentOptions = paymentsList().map(
-        el =>   <option value={el.symb} key={el.id}>
-                    {el.symb}
-                </option>
     );
     return (
         <div>
@@ -37,11 +39,14 @@ const ItemForm = ({ handleInput, handleAddItem, amount, paymentType, selectedIte
                     />
                 </div>
                 <div>
-                    <label>Payment Type</label>
-                    <select onChange={handleInput} name="paymentType" value={paymentType}>
-                        <option value="" />
-                        {paymentOptions}
-                    </select>
+                    <label>Buyer</label>
+                    <input
+                        type="buyer"
+                        placeholder="buyer"
+                        value={buyer}
+                        onChange={handleInput}
+                        name="buyer"
+                    />
                 </div>
                 <div>
                     <input 
@@ -51,12 +56,6 @@ const ItemForm = ({ handleInput, handleAddItem, amount, paymentType, selectedIte
                 </div>
             </form>
             <button onClick={handleReset}>Reset form</button>
-            <SelectedItemOverview
-                amount={amount}
-                paymentType={paymentType}
-                itemName={selectedItem}
-                totalAmount={totalAmount}
-            />
         </div>
     );
 }

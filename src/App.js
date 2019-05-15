@@ -13,6 +13,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Actions from './components/Actions/Actions';
 import ProcessPurchase from './components/Actions/ProcessPurchase';
 import ProcessReturn from './components/Actions/ProcessReturn';
+import PurchaseInformation from './components/Purchase/PurchaseInformation';
 
 class App extends React.Component {
   state = {
@@ -68,6 +69,13 @@ class App extends React.Component {
                           handleTokenVerification={this.handleTokenVerification}
                         />
                 }/>
+                <Route exact path="/purchase-information/:id" render={
+                  () => <PurchaseInformation
+                          isUserAuthenticated={this.state.isUserAuthenticated}
+                          handleTokenVerification={this.handleTokenVerification}
+                        />
+                }
+                />
               </Switch>
             </main>
           </div>

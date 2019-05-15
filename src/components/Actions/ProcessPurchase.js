@@ -4,6 +4,8 @@ import LayoutWrapper from '../shared/LayoutWrapper';
 import ShoppingCart from '../shared/ShoppingCart';
 import ItemForm from './ItemForm';
 import {itemsList} from '../../mock_data';
+import axios from 'axios';
+import PurchaseControls from './PurchaseControls';
 
 class ProcessPurchase extends React.Component {
     state = {
@@ -11,6 +13,8 @@ class ProcessPurchase extends React.Component {
         amount: 0,
         paymentType: "",
         selectedItem: "",
+        buyer: "",
+        discount: 0,
     }
     handleInput = (e) => {
         const name = e.target.name;
@@ -23,9 +27,10 @@ class ProcessPurchase extends React.Component {
         e.preventDefault();
         let item = itemsList().find(el => el.name === this.state.selectedItem);
         item = {
-            ...item,
+            product: item.id,
             amount: this.state.amount,
-            totalAmount: item.price * this.state.amount
+            unit_price: item.price,
+            quantity: this.state.amount
         }
         let items = [...this.state.items];
         items.push(item);
@@ -36,11 +41,32 @@ class ProcessPurchase extends React.Component {
         this.setState({
             amount: 0,
             selectedItem: "",
+            buyer: "",
+            discount: 0,
         });
     }
     handlePlacePurchase = (e) => {
         e.preventDefault();
-        console.log('order placed')
+        const purchase = {
+            detail: this.state.items,
+            user_buyer: this.state.buyer,
+            discount: this.state.discount,
+            payment_type: 1,
+            user: 1,
+        }
+        console.log(purchase)
+        /*
+        axios({
+            method: 'post',
+            url: 'https://localhost:8000/v1/pos/sales/sale',
+            data: {
+                detail: [
+
+                ],
+
+            }
+        })
+        */
     }
     render() {
         let totalAmount = 0;
@@ -68,10 +94,13 @@ class ProcessPurchase extends React.Component {
                         totalAmount={totalAmount}
                         handleAddItem={this.handleAddItem}
                         handleReset={this.handleReset}
+                        buyer={this.state.buyer}
                     />
-                    <button
-                        onClick={this.handlePlacePurchase}
-                    >Make Purchase</button>
+                    <PurchaseControls 
+                        handlePlacePurchase={this.handlePlacePurchase}
+                        handleInput={this.handleInput}
+                        discount={this.state.discount}
+                    />
                 </LayoutWrapper>
             </div>
         );
