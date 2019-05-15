@@ -1,30 +1,36 @@
 import React from 'react';
-import {itemsList, paymentsList} from '../../mock_data';
+import {itemsList} from '../../mock_data';
 
-const ItemForm = ({handleInput, onSubmit, amount, paymentType, itemName}) => {
+const ItemForm = ({ 
+    handleInput, 
+    handleAddItem, 
+    amount, 
+    buyer,
+    paymentType, 
+    selectedItem, 
+    totalAmount, 
+    handleReset }) => {
     const itemOptions = itemsList().map(
-        el => <option value={el.name} key={el.code}>
-                {el.name}
-              </option>
+        el => <option value={el.name} key={el.id}>
+            {el.name}
+        </option>
     );
-    const paymentOptions = paymentsList().map(
-        el => <option value={el.symb} key={el.id}>
-                {el.symb}
-              </option>
-    );
-    return(
+    return (
         <div>
-            <form>
+            <form onSubmit={handleAddItem}>
                 <div>
                     <label>Select Item</label>
-                    <select onChange={handleInput} name="itemName" value={itemName}>
-                        <option value=""/>
+                    <select onChange={handleInput} 
+                        name="selectedItem" 
+                        value={selectedItem}
+                    >
+                        <option value="" />
                         {itemOptions}
                     </select>
                 </div>
                 <div>
                     <label>Amount</label>
-                    <input 
+                    <input
                         type="number"
                         placeholder="amount"
                         value={amount}
@@ -33,13 +39,23 @@ const ItemForm = ({handleInput, onSubmit, amount, paymentType, itemName}) => {
                     />
                 </div>
                 <div>
-                    <label>Payment Type</label>
-                    <select onChange={handleInput} name="paymentType" value={paymentType}>
-                        <option value=""/>
-                        {paymentOptions}
-                    </select>
+                    <label>Buyer</label>
+                    <input
+                        type="buyer"
+                        placeholder="buyer"
+                        value={buyer}
+                        onChange={handleInput}
+                        name="buyer"
+                    />
+                </div>
+                <div>
+                    <input 
+                        type="submit"
+                        value="Add Item"
+                    />
                 </div>
             </form>
+            <button onClick={handleReset}>Reset form</button>
         </div>
     );
 }

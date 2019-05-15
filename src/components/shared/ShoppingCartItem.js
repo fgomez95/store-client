@@ -1,20 +1,17 @@
 import React from 'react';
 
-const shoppingCartItem = (props) => {
-    const {name, code, price, size} = props.item;
+const shoppingCartItem = ({item}) => {
+    console.log(item);
     return(
         <div className="shopping-cart-item">
             <p>
-                <b>Name: </b>{name}
+                <b>Item: </b>{item.product}
             </p>
             <p>
-                <b>Code: </b>{code}
+                <b>Price: </b>{item.unit_price}
             </p>
             <p>
-                <b>Price: </b>{price}
-            </p>
-            <p>
-                <b>Size: </b>{size}
+                <b>Total: </b>{item.quantity}
             </p>
         </div>
     );
