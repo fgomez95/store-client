@@ -30,6 +30,7 @@ class App extends React.Component {
   componentDidMount(){
     this.handleTokenVerification(true);
     this.handleAuthentication(true);
+    console.log(process.env)
   }
   render(){
     return(
