@@ -4,7 +4,7 @@ import LayoutWrapper from '../shared/LayoutWrapper';
 import ShoppingCart from '../shared/ShoppingCart';
 import ItemForm from './ItemForm';
 import {itemsList} from '../../mock_data';
-import axios from 'axios';
+//import axios from 'axios';
 import PurchaseControls from './PurchaseControls';
 
 class ProcessPurchase extends React.Component {

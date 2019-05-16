@@ -1,9 +1,11 @@
 #App {
-  margin: auto;
   width: 100%;
   background-color: #f5f5f5;
   height: 100vh;
   min-height: 568px;
+}
+#navigation {
+  background-color: #2962ff;
 }
 #home {
   border: solid 1px silver;
@@ -20,25 +22,20 @@
   margin: auto;
   border: solid black 1px;
 }
-#navigation {
-  width: 100%;
-  height: 50px;
-  background-color: #651fff;
-  position: fixed;
-}
+
 #spacer {
   width: 100%;
-  height: 15px;
+  height: 45px;
 }
 #layout-wrapper {
-  border: solid silver 0.01em;
-  height: 450px;
   padding: 0 10px;
-  background-color: white;
 }
 #cart {
   height: 300px;
   overflow: auto;
+}
+.nav-link {
+  color: white !important;
 }
 .shopping-cart-item {
   border: solid 1px black;
@@ -67,21 +64,23 @@
   cursor: pointer;
 }
 main {
-  padding: 0px 10px;
+  padding: 0px 25px;
 }
 /*
   Desktop
 */
 @media(min-width: 768px){
   #layout-wrapper {
-    height: 450px;
+    height: 620px;
     padding: 0 10px;
     background-color: white;
   }
-  #layout-wrapper {
-    height: 570px;
-  }
   main {
-    padding: 0px 50px;
+    padding: 0px 10px;
+  }
+  #inventory-table {
+    border: solid .5px silver;
+    height: 500px;
+    overflow: auto;
   }
 }

@@ -14,6 +14,8 @@ import Actions from './components/Actions/Actions';
 import ProcessPurchase from './components/Actions/ProcessPurchase';
 import ProcessReturn from './components/Actions/ProcessReturn';
 import PurchaseInformation from './components/Purchase/PurchaseInformation';
+import Inventory from './components/Inventory/Inventory';
+import InventoryForm from './components/Inventory/InventoryForm';
 
 class App extends React.Component {
   state = {
@@ -30,7 +32,6 @@ class App extends React.Component {
   componentDidMount(){
     this.handleTokenVerification(true);
     this.handleAuthentication(true);
-    console.log(process.env)
   }
   render(){
     return(
@@ -42,10 +43,8 @@ class App extends React.Component {
                   ? <Navigation />
                   : null
               }
-              hello
             </header>
             <main>
-              <div id="spacer"/>
               <Switch>
                 <Route exact path="/" render={ 
                   this.state.isUserAuthenticated
@@ -72,6 +71,20 @@ class App extends React.Component {
                 }/>
                 <Route exact path="/purchase-information/:id" render={
                   () => <PurchaseInformation
+                          isUserAuthenticated={this.state.isUserAuthenticated}
+                          handleTokenVerification={this.handleTokenVerification}
+                        />
+                }
+                />
+                <Route exact path="/inventory" render={
+                  () => <Inventory
+                          isUserAuthenticated={this.state.isUserAuthenticated}
+                          handleTokenVerification={this.handleTokenVerification}
+                        />
+                }
+                />
+                <Route exact path="/inventory/new" render={
+                  () => <InventoryForm
                           isUserAuthenticated={this.state.isUserAuthenticated}
                           handleTokenVerification={this.handleTokenVerification}
                         />
